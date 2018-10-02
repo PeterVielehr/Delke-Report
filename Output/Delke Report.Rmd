@@ -83,7 +83,7 @@ ggplot(delke.zones2, aes(blackrate)) +
   theme_bw()  
 ```
 
-In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.
+In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large amount about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.
 
 #Searches
 
@@ -149,7 +149,7 @@ p<-ggplot(data=df, aes(x=names, y=rate, fill=group)) +
   xlab("") +
   ylab("% of Drivers Searched")+
   ggtitle("Figure 3: Percent of Drivers Searched\nOfficers Making More than 100 Stops Over 2-year Period", 
-          subtitle = "Median Officer Percentage Compared to Officer Delke, (N=666)") +
+          subtitle = "Median Officer Percentage Compared to Officer Delke, (N=670)") +
   theme(legend.title=element_blank())
 p
 
