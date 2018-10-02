@@ -1,10 +1,9 @@
 ---
 title: "Analysis of Officer Delke's Traffic Stops and Searches"
-author: "Peter Vielehr"
-date: "9/29/2018"
+author: "Peter Vielehr, MA"
+date: "10/2/2018"
 output:
   pdf_document: default
-  html_document: default
 ---
 
 
