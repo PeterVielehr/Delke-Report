@@ -31,21 +31,23 @@ source(paste0(path, "Hit Rate/src.R"))
 
 Officer Delke shot Daniel Hambrick in the back while he was running away on July 26, 2018. He was hired by MNPD on July 1, 2016 and on December 28, 2016 was assigned to the East Precinct. The first traffic stop record for Officer Delke is from March 4, 2017 while assigned to the South Precinct. Following his assignment to East Precinct (from December 28, 2016 to February 24, 2017), Officer Delke spent two months in South Precinct (February 25, 2017 to April 20, 2017) before moving to North Precinct and finishing out 2017. On January 7, 2018, Officer Delke was assigned to East Precinct. Subsequently, Officer Delke was assigned to the Juvenile Crimes Task Force.
 
-Data for this analysis come from public records requests of MNPD’s Form 252 database and employee demographics. Following each traffic stop, officers are required to submit a 252 form and the record is collected in the database. Additional employee data come from an officer demographic and assignment database received through a public records request covering 2010 through the end of 2017. 
+In light of this officer-involved fatal shooting, the question of whether there were warning signs of racial bias in Officer Delke's past is a natural question. A quantitative analysis of police records cannot shed light on individual cases of racial profiling or racial bias but can provide additional context for understanding the work that an officer was conducting. If large racial disparities in traffic stops or searches exist and are outside of the norm for other officers, additional scrutiny should be given to whether the officer was fair and unbiased in their policing practices. This analysis seeks to better understand Officer Delke's traffic stop and search practices as compared to other officers in Metro Nashville Police Department (MNPD). Hopefully, additional context on Officer Delke's policing practices can help identify ways to reduce the likelihood of future officer-involved shootings and other adverse interactions with community members.
+
+Data for this analysis come from public records requests of MNPD’s Form 252 database and employee demographics. Following each traffic stop, officers are required to submit a 252 form and the record is collected in the database. Additional employee data come from an officer demographic and assignment database received through a public records request. 
 
 Between March 4, 2017 and July 26, 2018, Officer Delke conducted `r officers.summary$n[officers.summary$delke==T]` traffic stops (not including his stop of Daniel Hambrick). Of these, `r officers.summary$blackstops[officers.summary$delke==T]` (`r officers.summary$blackrate[officers.summary$delke==T]`%) were of black drivers and `r officers.summary$whitestops[officers.summary$delke==T]` (`r officers.summary$whiterate[officers.summary$delke==T]`%) were of white drivers. He conducted `r officers.summary$totalsearch[officers.summary$delke==T]` searches (`r officers.summary$searchpct[officers.summary$delke==T]`% of all stops) and found evidence in a total of `r officers.summary$evidence[officers.summary$delke==T]` searches (`r officers.summary$drugs[officers.summary$delke==T]` searches with drugs, `r officers.summary$weapons[officers.summary$delke==T]` with weapons, and `r officers.summary$otherevidence[officers.summary$delke==T]` with other evidence) for a hit-rate of `r officers.summary$allsearch.hitrate[officers.summary$delke==T]`%. When comparing searches by race, he conducted `r officers.summary$totalsearch.black[officers.summary$delke==T]` searches of black drivers (`r round((officers.summary$totalsearch.black[officers.summary$delke==T]/officers.summary$totalsearch[officers.summary$delke==T])*100, digits=1)`% of total searches; `r officers.summary$blacksearchrate[officers.summary$delke==T]`% of all black drivers stopped) and `r officers.summary$totalsearch.white[officers.summary$delke==T]` searches of white drivers (`r round((officers.summary$totalsearch.white[officers.summary$delke==T]/officers.summary$totalsearch[officers.summary$delke==T])*100, digits=1)`% of total searches; `r officers.summary$whitesearchrate[officers.summary$delke==T]`% of all white drivers stopped). He found evidence in `r officers.summary$blackevidence[officers.summary$delke==T]` searches of black drivers (`r officers.summary$black.hitrate[officers.summary$delke==T]`%) and one search of a white driver.
 
 These figures cannot be interpreted in isolation. A large research literature on racial profiling shows that proving racial bias on the part of an individual using aggregate data is not possible. Researchers have developed ways to infer whether racial bias may be taking place but there are many methodological challenges in doing so. A central concern is the definition of racial profiling and racial bias. Profiling and bias refer to an individual’s decision making process when deciding who to pull over or search (Glaser 2014). The MNPD policy manual defines racially biased policing as using race as the *sole* reason for initiating a police action. Race can be a reason for making a stop as long as another legal reason for making the stop is stated. If a legal reason for making a stop exists, it can be used as a pretext to initiate a stop and investigate whether other violations are occurring. For example, as stated in the arrest affidavit of Officer Delke, "because Officer Delke understood that part of the [Juvenile Crimes] Task Force directive was to make traffic stops, he continued to follow to see if he could develop a reason to stop the Impala."
 
-There are also different methodological issues in analyzing the decision to make a traffic stop and the decision to search a vehicle. For making a stop, the risk that an individual is pulled over depends on the composition of the driving population in the area the stop is made and the driving behavior of the drivers. This is referred to as the benchmarking or denominator problem (Fridell 2004). There may be racial differences in the quantity, quality, and location of driving that could influence the likelihood of a traffic stop being made. Many of the neighborhoods where Officer Delke worked have high populations of black residents, some as high as 80-90% black. Therefore, the driving population in those areas is likely to be primarily black. For this analysis, the location of traffic stops will be taken into account based on MNPD's patrol zones. Additionally, determining whether a rate of traffic stops is justifiable is challenging. One strategy to get around using benchmarks from outside data sources (like the US Census) is to use an “internal benchmark.” An internal benchmark is calculated based on all officers that patrol a given area. This gives the normative rate which can then show whether a specific officer is outside of the norm for similarly situated officers. If an officer shows a consistent disparity compared to other officers across many zones, he or she may be using biased criteria when deciding to stop a vehicle. However, it is also possible that non-bias reasons may account for differences.
+## Methods and limitations
 
-When analyzing the decision to search at a stop, the underlying population at risk of a search is known since a driver has to have been stopped in order to get searched. The rate of searches is a bit more straight forward than decisions to stop a vehicle, but there are still limitations (Knowles, Persico, and Todd 1999; Rojek, Rosenfeld, and Decker 2012). There may be bias-neutral reasons for a racial disparity in searches. For instance, drivers may have different probabilities of displaying suspicious behavior across race or officers may come in contact with different rates of suspicious activity. However, comparing to other officers provides a standard for comparison. While officers experiences are unique, there should be some similarities between officers in regard to deciding when to conduct a search.
+There are different methodological issues between analyzing the decision to make a traffic stop and the decision to search a vehicle. For making a stop, the risk that an individual is pulled over depends on the composition of the driving population in the area the stop is made and the traffic law violations of the drivers. Since a rate is caluculated by dividing the number of stops by the at-risk population, having an unknown at-risk population is referred to as the benchmarking or denominator problem (Fridell 2004). There may be racial differences in the quantity, quality, and location of driving that could influence the likelihood of a traffic stop being made. Many of the neighborhoods where Officer Delke worked have high populations of black residents, some as high as 80-90% black. Therefore, the driving population in those areas is likely to be primarily black but may not match the residential population. For this analysis, the location of traffic stops will be taken into account based on MNPD's patrol zones. 
 
-Finally, hit rates show whether different levels of suspicion are being applied to groups (Persico and Todd 2006). Categorical differences, when found, show that a group has a lower or higher threshold used to initiate a search, though some limitations are discussed in the research literature (Simoiu, Corbett-Davies, and Goel 2016). For instance, there may be group differences in the rates of carrying evidence. Applying a hit rate analysis to individuals is also challenging since the population that each officer has searched is usually small and a single instance of finding evidence can alter the hit rate drastically. Take, for example, an officer who conducts five searches. Each instance of finding evidence would change her or his hit rate by 20%. That large swing makes hit rates less reliable when applied to individuals. Some modeling strategies can be used to adjust for this, but they are not addressed in this brief report.
+Determining whether a rate of traffic stops is justifiable is challenging. One strategy to get around using benchmarks from outside data sources---like the US Census---is to use an “internal benchmark.” An internal benchmark is calculated based on all officers that patrol a given area. This gives the normative rate which can then show whether a specific officer is outside of the norm for similarly situated officers. If an officer shows a consistent disparity compared to other officers across many zones, he or she may be using biased criteria when deciding to stop a vehicle. However, it is also possible that non-bias reasons may account for differences.
 
-#Traffic Stops
+When analyzing the decision to conduct a search during a stop, the underlying population at risk of a search is known since a driver has to have been stopped in order to get searched. The rate of searches is a bit more straight forward than decisions to stop a vehicle, but there are still limitations (Knowles, Persico, and Todd 1999; Rojek, Rosenfeld, and Decker 2012). There may be bias-neutral reasons for a racial disparity in searches. For instance, drivers may have different probabilities of displaying suspicious behavior across race or officers may come in contact with different rates of suspicious activity. However, comparing to other officers provides a reasonable standard for comparison. While officers experiences are unique, there should be some similarities between officers in regard to deciding when to conduct a search.
 
-As discussed above, an analysis of traffic stops must take into account the location of the stop and use a legitimate comparison in order to contextualize and rates. To do this, I calculated the percent of stops made that were black drivers for every officer in every patrol zone. I selected zones where Officer Delke made more than 10 stops and excluded any officer who made less than 10 stops. This produced `r nrow(delke.zones)` Officer-Zone observations. Figure 1 shows the distribution of officers' rate of stopping black drivers in each patrol zone. The bluish line represents officer Delke in the distribution.
+Finally, hit rates show whether different levels of suspicion are being applied to groups (Persico and Todd 2006). Categorical differences, when found, show that a group has a lower or higher threshold used to initiate a search, though some limitations are discussed in the research literature (Simoiu, Corbett-Davies, and Goel 2016). For instance, there may be group differences in the rates of carrying evidence. Applying a hit rate analysis to individuals is also challenging since the population that each officer has searched is usually small and a single instance of finding evidence can alter the hit rate drastically. Take, for example, an officer who conducts five searches. Each instance of finding evidence would change her or his hit rate by 20%. That large swing makes hit rates less reliable when applied to individuals than when applied to a department as a whole. Some modeling strategies can be used to adjust for these limitations, but they are not addressed in this brief report.
 
 ```{r table 1, echo=FALSE, message=FALSE, warning=FALSE}
 t<-data.frame(delke.summary$zone, delke.summary$n, delke.summary$blackstops, delke.summary$blackrate,
@@ -64,7 +66,13 @@ column_spec(1:7, width = "3em")  %>%
 
 ```
 
+#Traffic Stops
+
+As discussed above, an analysis of traffic stops must take into account the location of the stop and use a legitimate comparison in order to contextualize and rates. To do this, I calculated the percent of stops made that were black drivers for every officer in every patrol zone. I selected zones where Officer Delke made more than 10 stops and excluded any officer who made less than 10 stops. This produced `r nrow(delke.zones)` Officer-Zone observations. Figure 1 shows the distribution of officers' rate of stopping black drivers in each patrol zone. The bluish line represents officer Delke in the distribution.
+
 Table 1 shows Officer Delke’s total stops, stops of black drivers, and percent of drivers who were black in each zone. For all officers, the average percentage and the standard deviation of the mean is shown. Finally, officer Delke’s z-scores show the number of standard deviations his rate is from the mean. 
+
+In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large amount about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.
 
 ```{r Figure 1, echo=FALSE, message=FALSE, warning=FALSE}
 delke.zones2<-delke.zones %>%
@@ -77,13 +85,14 @@ ggplot(delke.zones2, aes(blackrate)) +
   facet_wrap(~zone, scales = "free") +
   ggtitle("Figure 1: Percent of Stops where the Driver is Black by Zone,",
           subtitle = "Only Officers Making 10 or More Stops in Zone") +
-  labs(fill = "Officer\nDelke") +
   xlab("Percentage of Drivers Who Are Black")+ 
   ylab("Number of Officers") +
-  theme_bw()  
+  theme_bw()  + 
+  scale_fill_discrete(name="Legend",
+                         breaks=c("TRUE", "FALSE"),
+                         labels=c("Officer Delke", "Other Officers")) + 
+  theme( legend.position=c(.75, .15), legend.background = element_rect(fill="gray90", size=.5, linetype="solid"))
 ```
-
-In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large amount about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.
 
 #Searches
 
@@ -124,17 +133,17 @@ ggplot(search.hist.df, aes(value)) +
 
 ```
 
-```{r bar graph, echo=FALSE, message=FALSE, warning=FALSE}
-mean.officer.allsearch<-mean(officers.summary$searchpct, na.rm=T)
-median.officer.allsearch<-median(officers.summary$searchpct, na.rm = T)
-mean.officer.blacksearch<-mean(officers.summary$blacksearchrate, na.rm=T)
-median.officer.blacksearch<-median(officers.summary$blacksearchrate, na.rm=T)
-mean.officer.whitesearch<-mean(officers.summary$whitesearchrate, na.rm=T)
-median.officer.whitesearch<-median(officers.summary$whitesearchrate, na.rm=T)
+```{r bar graph, echo=FALSE, fig.height=4, message=FALSE, warning=FALSE}
+mean.officer.allsearch<-mean(officers.gt100stops$searchpct, na.rm=T)
+median.officer.allsearch<-median(officers.gt100stops$searchpct, na.rm = T)
+mean.officer.blacksearch<-mean(officers.gt100stops$blacksearchrate, na.rm=T)
+median.officer.blacksearch<-median(officers.gt100stops$blacksearchrate, na.rm=T)
+mean.officer.whitesearch<-mean(officers.gt100stops$whitesearchrate, na.rm=T)
+median.officer.whitesearch<-median(officers.gt100stops$whitesearchrate, na.rm=T)
 
-Delke.Searchrate<-round(officers.summary$searchpct[officers.summary$delke==T], digits = 1)
-Delke.blackSearchrate<-round(officers.summary$blacksearchrate[officers.summary$delke==T], digits = 1)
-Delke.whitesearchrate<-round(officers.summary$whitesearchrate[officers.summary$delke==T], digits = 1)
+Delke.Searchrate<-round(officers.gt100stops$searchpct[officers.summary$delke==T], digits = 1)
+Delke.blackSearchrate<-round(officers.gt100stops$blacksearchrate[officers.summary$delke==T], digits = 1)
+Delke.whitesearchrate<-round(officers.gt100stops$whitesearchrate[officers.summary$delke==T], digits = 1)
 
 names<-factor(c("Median Officer", "Officer Delke", "Median Officer", "Officer Delke", "Median Officer", "Officer Delke"),
               levels = c("Median Officer", "Officer Delke"))
@@ -159,7 +168,7 @@ p
 
 Analyzing hit rates becomes challenging because many officer have not conducted enough searches to calculate stable percentages. Hit rates are usually calculated in aggregate. I selected only officers who had made more than 100 stops in the two-year period and had conducted more than five searches of black drivers (N=`r nrow(officers.gt100stops.gt5search)` officers). Many officers did not find evidence. The median officer found evidence in `r median(officers.gt100stops.gt5search$allsearch.hitrate)`% of searches. For only black drivers, the median was `r median(officers.gt100stops.gt5search$black.hitrate)`%. Officer Delke found evidence in `r officers.gt100stops.gt5search$allsearch.hitrate[officers.gt100stops.gt5search$delke==T]`% of searches. Since Officer Delke only conducted three searches of white drivers, his hit-rate does not change when focusing on only black drivers. Officer Delke’s hit rate is within the norm for officers and slightly higher than the average. 
 
-```{r hit rate, echo=FALSE, fig.height=3, message=FALSE, warning=FALSE}
+```{r hit rate, echo=FALSE, fig.height=2.5, message=FALSE, warning=FALSE}
 
 ggplot(hitrate, aes(value)) +
   geom_histogram(aes(fill = delke), binwidth = 2) +
@@ -176,11 +185,9 @@ ggplot(hitrate, aes(value)) +
 
 This report aimed to compare Officer Delke's traffic stop and vehicle search practices with other officers in the areas he patrolled and in MNPD as a whole. In general, Officer Delke's traffic stops and vehicle searches paint a picture of an officer who stopped and searched black drivers more aggressively than his peers. His traffic stop rate was above his fellow officers in several of the zones he patrolled. His rate of searching black drivers stands out in particular as being disproportionate to his peers. His rate of finding evidence in these searches was `r officers.gt100stops.gt5search$allsearch.hitrate[officers.gt100stops.gt5search$delke==T]`%, in line with other officers. His hit rate also means that `r 100-officers.gt100stops.gt5search$allsearch.hitrate[officers.gt100stops.gt5search$delke==T]`% of people he searched did not have evidence of any crime.
 
-In the Driving While Black Report, Gideon's Army made several recommendations for decreasing the racial disparity of traffic stops and searches in Nashville. One recommendation included using "data analytic and machine learning tools...to reduce officer-level racial disparities in traffic stops made, searches conducted, and traffic stop outcomes" (Gideon’s Army 2016:179). One example of a department instituting this type of monitoring is Charlotte-Mecklenburg Police Department which worked with researchers to develop an early intervention system for officers at risk of "adverse events" (Carton et al. 2016).The data-driven system in Charlotte-Mecklenburg is more effective than relying on supervisors expertise in identifying at risk officers.
+In the Driving While Black Report, Gideon's Army made several recommendations for decreasing the racial disparity of traffic stops and searches in Nashville. One recommendation included using "data analytic and machine learning tools...to reduce officer-level racial disparities in traffic stops made, searches conducted, and traffic stop outcomes" (Gideon’s Army 2016:179). One example of a department instituting this type of monitoring is Charlotte-Mecklenburg Police Department which worked with researchers to develop an early intervention system for officers at risk of "adverse events" (Carton et al. 2016). The data-driven system in Charlotte-Mecklenburg is more effective than relying on supervisors expertise in identifying at risk officers.
 
 Based on this analysis of Officer Delke's racial disparities in traffic stops and vehicle searches, he would likely have been flagged for early intervention if MNPD had instituted the recommended action for data-driven monitoring of officer's disparate racial impact. This case also points to the need of an independent oversight board which would be able to recommend policy changes and monitor data on officer actions.
-
-
 
 #References 
 
